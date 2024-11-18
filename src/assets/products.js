@@ -2,7 +2,7 @@ const products = [
   {
     _id: "1",
     name: "Airpods Wireless Bluetooth Headphones",
-    image: "/image/airpods.js",
+    image: "../../images/airpods.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate adipisci error ut itaque asperiores? Debitis quibusdam eos doloremque odit inventore aut dolorum quas molestiae unde. Beatae similique id accusamus fuga!",
     brand: "Apple",
@@ -15,7 +15,7 @@ const products = [
   {
     _id: "2",
     name: "iPhone 11 Pro 256GB Memory",
-    image: "/image/phone.js",
+    image: "../../images/phone.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate adipisci error ut itaque asperiores? Debitis quibusdam eos doloremque odit inventore aut dolorum quas molestiae unde. Beatae similique id accusamus fuga!",
     brand: "Apple",
@@ -28,20 +28,20 @@ const products = [
   {
     _id: "3",
     name: "Amazon Alex",
-    image: "/image/phone.js",
+    image: "../../images/alexa.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate adipisci error ut itaque asperiores? Debitis quibusdam eos doloremque odit inventore aut dolorum quas molestiae unde. Beatae similique id accusamus fuga!",
     brand: "Amazon",
     category: "Electronics",
     price: 52.47,
-    countInStock: 7,
+    countInStock: 0,
     rating: 4.7,
     numReviews: 8,
   },
   {
     _id: "4",
     name: "Came Cannon 80D",
-    image: "/image/phone.js",
+    image: "../../images/camera.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate adipisci error ut itaque asperiores? Debitis quibusdam eos doloremque odit inventore aut dolorum quas molestiae unde. Beatae similique id accusamus fuga!",
     brand: "Cannon",
@@ -54,7 +54,7 @@ const products = [
   {
     _id: "5",
     name: "Mouse Logitech",
-    image: "/image/phone.js",
+    image: "../../images/mouse.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate adipisci error ut itaque asperiores? Debitis quibusdam eos doloremque odit inventore aut dolorum quas molestiae unde. Beatae similique id accusamus fuga!",
     brand: "Logitech",
@@ -67,7 +67,7 @@ const products = [
   {
     _id: "6",
     name: "Playstation 4",
-    image: "/image/phone.js",
+    image: "../../images/playstation.jpg",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate adipisci error ut itaque asperiores? Debitis quibusdam eos doloremque odit inventore aut dolorum quas molestiae unde. Beatae similique id accusamus fuga!",
     brand: "Sony",
@@ -78,3 +78,5 @@ const products = [
     numReviews: 5,
   },
 ];
+
+export default products;
