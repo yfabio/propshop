@@ -26,6 +26,10 @@ const CartScreen = () => {
     removeItem(item);
   };
 
+  const checkoutHandler = () => {
+    navigate("/login?redirect=shipping");
+  };
+
   return (
     <Row>
       <Col md={8}>
@@ -91,7 +95,11 @@ const CartScreen = () => {
             </ListGroup.Item>
             <ListGroup.Item>
               <div className="d-grid">
-                <Button type="button" disabled={cartItems.length === 0}>
+                <Button
+                  type="button"
+                  onClick={checkoutHandler}
+                  disabled={cartItems.length === 0}
+                >
                   Proceed To Checkout
                 </Button>
               </div>
@@ -104,5 +112,3 @@ const CartScreen = () => {
 };
 
 export default CartScreen;
-
-// 1:15
