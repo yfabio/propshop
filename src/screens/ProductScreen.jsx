@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import {
   Form,
   Row,
@@ -13,21 +13,27 @@ import Rating from "../components/Rating.jsx";
 import Loader from "../components/Loader.jsx";
 import Message from "../components/Message.jsx";
 import ProductContext from "../context/product/ProductContext";
+import CartContext from "../context/cart/CartContext";
 
 const ProductScreen = () => {
+  const { addToCart } = useContext(CartContext);
+
   const { product, error, isLoading, getProduct } = useContext(ProductContext);
 
   const [qty, setQty] = useState(1);
 
   const { id: productId } = useParams();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     getProduct(productId);
   }, []);
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  const addToCartHandler = () => {
+    addToCart({ ...product, qty });
+    // navigate("/cart");
+  };
 
   return (
     <>
@@ -113,6 +119,7 @@ const ProductScreen = () => {
                       <Button
                         type="button"
                         disabled={product.countInStock === 0}
+                        onClick={addToCartHandler}
                       >
                         Add to Cart
                       </Button>
