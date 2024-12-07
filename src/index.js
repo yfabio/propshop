@@ -12,6 +12,8 @@ import App from "./App";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -20,6 +22,8 @@ const route = (
     <Route index={true} path="/" element={<HomeScreen />} />
     <Route path="/product/:id" element={<ProductScreen />} />
     <Route path="/cart" element={<CartScreen />} />
+    <Route path="/login" element={<LoginScreen />} />
+    <Route path="/register" element={<RegisterScreen />} />
   </Route>
 );
 

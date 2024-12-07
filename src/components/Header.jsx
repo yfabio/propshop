@@ -1,12 +1,26 @@
 import { useContext } from "react";
-import { Navbar, Nav, Container, Badge } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  Container,
+  Badge,
+  Dropdown,
+  NavDropdown,
+} from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
 import logo from "../assets/logo.png";
 import CartContext from "../context/cart/CartContext";
+import UserContext from "../context/user/UserContext";
 
 const Header = () => {
   const { cartItems } = useContext(CartContext);
+
+  const { user, logout } = useContext(UserContext);
+
+  const logoutHandler = (e) => {
+    logout();
+  };
 
   return (
     <header>
@@ -31,11 +45,22 @@ const Header = () => {
                   )}
                 </Nav.Link>
               </LinkContainer>
-              <LinkContainer to={"/login"}>
-                <Nav.Link>
-                  <FaUser /> Sing In
-                </Nav.Link>
-              </LinkContainer>
+              {user ? (
+                <NavDropdown title={user.name} id={user.id}>
+                  <LinkContainer to={"/profile"}>
+                    <NavDropdown.Item>Profile</NavDropdown.Item>
+                  </LinkContainer>
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              ) : (
+                <LinkContainer to={"/login"}>
+                  <Nav.Link>
+                    <FaUser /> Sing In
+                  </Nav.Link>
+                </LinkContainer>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>
