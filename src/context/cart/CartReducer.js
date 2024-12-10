@@ -22,13 +22,29 @@ const cartReducer = (state, action) => {
       };
 
     case "REMOVE_ITEM":
-      const result = {
+      const removeItemState = {
         cartItems: state.cartItems.filter((x) => x.id !== action.payload.id),
       };
 
-      new UpdateCart(result).update();
+      new UpdateCart(removeItemState).update();
 
-      return result;
+      return removeItemState;
+    case "SHIPPING_ADDRESS":
+      const saveShippingAddressState = {
+        ...state,
+        shippingAddress: action.payload.address,
+      };
+      new UpdateCart(saveShippingAddressState).update();
+      action.payload.cb();
+      return saveShippingAddressState;
+    case "PAYMENT_METHOD":
+      const paymentMethodState = {
+        ...state,
+        paymentMethod: action.payload.payment,
+      };
+      new UpdateCart(paymentMethodState).update();
+      action.payload.cb();
+      return paymentMethodState;
     default:
       return state;
   }

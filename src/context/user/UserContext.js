@@ -45,7 +45,6 @@ export const UserProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user: state.user,
-        token: state.token,
         login,
         logout,
         register,
