@@ -41,15 +41,28 @@ export const CartProvider = ({ children }) => {
     });
   };
 
+  const clearCart = () => {
+    dispatch({
+      type: "CLEAR_CART",
+      payload: { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" },
+    });
+  };
+
   return (
     <CartContext.Provider
       value={{
         cartItems: state.cartItems,
         shippingAddress: state.shippingAddress,
+        paymentMethod: state.paymentMethod,
+        itemsPrice: state.itemsPrice,
+        shippingPrice: state.shippingPrice,
+        taxPrice: state.taxPrice,
+        totalPrice: state.totalPrice,
         addToCart,
         removeItem,
         saveShippingAddress,
         savePaymentMethod,
+        clearCart,
       }}
     >
       {children}

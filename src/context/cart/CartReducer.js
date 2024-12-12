@@ -45,6 +45,12 @@ const cartReducer = (state, action) => {
       new UpdateCart(paymentMethodState).update();
       action.payload.cb();
       return paymentMethodState;
+    case "CLEAR_CART":
+      const clearCartState = {
+        ...action.payload,
+      };
+      new UpdateCart(clearCartState).update();
+      return clearCartState;
     default:
       return state;
   }
