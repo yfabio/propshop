@@ -1,14 +1,12 @@
 import { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
-import { toast } from "react-toastify";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 
 import CheckoutSteps from "../components/CheckoutSteps";
 import CartContext from "../context/cart/CartContext";
 import OrderContext from "../context/order/OrderContext";
-import UserContext from "../context/user/UserContext";
 
 const PlaceOrderScreen = () => {
   const {
@@ -19,12 +17,9 @@ const PlaceOrderScreen = () => {
     totalPrice,
     shippingAddress,
     paymentMethod,
-    clearCart,
   } = useContext(CartContext);
 
   const { createOrder, isLoading, error } = useContext(OrderContext);
-
-  const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -37,7 +32,7 @@ const PlaceOrderScreen = () => {
   }, [shippingAddress.address, paymentMethod, navigate]);
 
   const placeOrderHandler = (e) => {
-    createOrder(user, {
+    createOrder({
       orderItems: cartItems,
       shippingAddress,
       paymentMethod,
@@ -46,7 +41,6 @@ const PlaceOrderScreen = () => {
       taxPrice,
       totalPrice,
     });
-    //clearCart();
   };
 
   return (

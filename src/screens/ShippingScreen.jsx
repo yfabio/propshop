@@ -3,7 +3,6 @@ import { Form, Button } from "react-bootstrap";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import CartContext from "../context/cart/CartContext";
-import { useNavigate } from "react-router-dom";
 
 const ShippingScreen = () => {
   const { shippingAddress, saveShippingAddress } = useContext(CartContext);
@@ -14,8 +13,6 @@ const ShippingScreen = () => {
     shippingAddress?.postalCode || ""
   );
   const [country, setCountry] = useState(shippingAddress?.country || "");
-
-  const navigate = useNavigate();
 
   const submitHandler = (e) => {
     e.preventDefault();

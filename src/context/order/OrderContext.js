@@ -1,41 +1,55 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import orderReducer from "../order/OrderReducer";
-import axios from "axios";
-import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CartContext from "../cart/CartContext";
+import useAxios from "../../hooks/useAxios";
 
 const OrderContext = createContext();
-
-const ordersUrl = process.env.REACT_APP_API_ORDERS;
 
 export const OrderProvider = ({ children }) => {
   const initialState = {
     order: {},
     isLoading: false,
-    error: "",
+    error: null,
   };
 
-  const navigate = useNavigate();
+  const axios = useAxios();
 
   const [state, dispatch] = useReducer(orderReducer, initialState);
 
+  const navigate = useNavigate();
+
+  const { clearCart } = useContext(CartContext);
+
   const loading = (value) => dispatch({ type: "IS_LOADING", payload: value });
 
-  const createOrder = async (user, order) => {
+  const createOrder = async (order) => {
     try {
       loading(true);
-      const { data } = await axios.post(`${ordersUrl}/api/orders`, order, {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          Authorization: user.token,
-        },
-      });
+      const { data } = await axios.post(`/api/orders`, order);
+      if (data.id) {
+        clearCart();
+        navigate(`/order/${data.id}`);
+      }
+    } catch (err) {
+      dispatch({ type: "ERROR", payload: err.message });
+    } finally {
+      loading(false);
+    }
+  };
+
+  const getOrderDetails = async (id) => {
+    try {
+      loading(true);
+      const { data } = await axios.get(`/api/orders/${id}`);
       dispatch({
-        type: "CREATE_ORDER",
+        type: "GET_ORDER",
         payload: {
           order: data,
-          cb: () => navigate(`/order/${data.id}`),
+          cb: () => {
+            clearCart();
+            navigate(`/order/${data.id}`);
+          },
         },
       });
     } catch (err) {
@@ -48,9 +62,11 @@ export const OrderProvider = ({ children }) => {
   return (
     <OrderContext.Provider
       value={{
+        order: state.order,
         isLoading: state.isLoading,
         error: state.error,
         createOrder,
+        getOrderDetails,
       }}
     >
       {children}

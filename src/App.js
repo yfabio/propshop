@@ -11,10 +11,10 @@ import { OrderProvider } from "./context/order/OrderContext";
 
 function App() {
   return (
-    <OrderProvider>
-      <UserProvider>
-        <ProductProvider>
-          <CartProvider>
+    <UserProvider>
+      <CartProvider>
+        <OrderProvider>
+          <ProductProvider>
             <>
               <ToastContainer />
               <Header />
@@ -25,10 +25,10 @@ function App() {
               </main>
               <Footer />
             </>
-          </CartProvider>
-        </ProductProvider>
-      </UserProvider>
-    </OrderProvider>
+          </ProductProvider>
+        </OrderProvider>
+      </CartProvider>
+    </UserProvider>
   );
 }
 
